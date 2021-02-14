@@ -32,6 +32,10 @@ $PAGE->set_title(get_string('pluginname', 'block_superframe'));
 $PAGE->navbar->add(get_string('pluginname', 'block_superframe'));
 require_login();
 
+// Check the users permissions to see the view page.
+$context = context_course::instance($COURSE->id);
+require_capability('block/superframe:seeviewpage', $context);
+
 // Start output to browser.
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('pluginname', 'block_superframe'), 5);
