@@ -77,5 +77,5 @@ $capabilities = array(
             'student' => CAP_PREVENT,
             'guest' => CAP_PREVENT
         )
-    )
+    ),
 );

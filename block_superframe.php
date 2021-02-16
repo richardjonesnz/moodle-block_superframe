@@ -94,6 +94,13 @@ class block_superframe extends block_base {
             $this->content->text .= '<p>' . html_writer::link($url, get_string('viewlink', 'block_superframe')) . '</p>';
         }
 
+        // List of course students.
+        $courseid = $this->page->course->id;
+        $users = self::get_course_users($courseid);
+        foreach ($users as $user) {
+            $this->content->text .='<li>' . $user->lastname . ', ' . $user->firstname . '</li>';
+        }
+
         return $this->content;
     }
     /**
@@ -119,5 +126,23 @@ class block_superframe extends block_base {
      */
     function has_config() {
         return true;
+    }
+
+    private static function get_course_users($courseid) {
+        global $DB;
+
+        $sql = "SELECT u.id, u.firstname, u.lastname
+                FROM {course} as c
+                JOIN {context} as x ON c.id = x.instanceid
+                JOIN {role_assignments} as r ON r.contextid = x.id
+                JOIN {user} AS u ON u.id = r.userid
+               WHERE c.id = :courseid
+                 AND r.roleid = :roleid";
+
+        // In real world query should check users are not deleted/suspended.
+
+        $records = $DB->get_records_sql($sql, ['courseid' => $courseid, 'roleid' => 5]);
+
+        return $records;
     }
 }
