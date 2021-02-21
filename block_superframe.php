@@ -76,13 +76,6 @@ class block_superframe extends block_base {
         // OK let's add some content.
         $this->content = new stdClass();
         $this->content->footer = '';
-        $this->content->text = get_string('welcomeuser', 'block_superframe',
-                $USER);
-
-        // Optionally add some kind of message.
-        $this->content->text .= '<p class="text-success">' .
-                                 get_string('message', 'block_superframe') .
-                                 '</p>';
 
         // Add the block id to the Moodle URL for the view page.
         $blockid = $this->instance->id;
@@ -90,16 +83,18 @@ class block_superframe extends block_base {
 
         // Check the capability.
         if (has_capability('block/superframe:seeviewpagelink', $context)) {
-            $url = new moodle_url('/blocks/superframe/view.php', ['blockid' => $blockid]);
-            $this->content->text .= '<p>' . html_writer::link($url, get_string('viewlink', 'block_superframe')) . '</p>';
+            $renderer = $this->page->get_renderer('block_superframe');
+            $this->content->text = $renderer->fetch_block_content($blockid);
         }
 
         // List of course students.
+        /* Ignore this optional task for now - add to renderer function if you like.
         $courseid = $this->page->course->id;
         $users = self::get_course_users($courseid);
         foreach ($users as $user) {
             $this->content->text .='<li>' . $user->lastname . ', ' . $user->firstname . '</li>';
         }
+        */
 
         return $this->content;
     }

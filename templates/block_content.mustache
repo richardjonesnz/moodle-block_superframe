@@ -16,24 +16,19 @@
 }}
 
 {{!
-    @template block_superframe/frame
+    @template block_superframe/block_content
 
-    This template renders a url in an iframe of given size.
-
-
+    This template renders the content for the block.
 
     Example context (json):
     {
-        "heading": "My superframe",
+        "welcome": "Welcome user",
         "url": "http://www.moodlebites.com",
-        "height": "400",
-        "width": "600"
+        "text": "view page link"
     }
 }}
 
-<div  class="container">
-        <p>{{fullname}}</p>
-    <h5>{{heading}}</h5>
-    <iframe src="{{url}}" height="{{height}}" width="{{width}}">
-    </iframe>
+<div>
+    <h3>{{welcome}}</h3>
+    <a href="{{{url}}}">{{text}}</a>
 </div>
