@@ -67,3 +67,4 @@ $string['blockname'] = 'Block name';
 $string['course'] = 'Block course';
 $string['catname'] = 'Course category';
 $string['tablecaption'] = 'Block data';
+$string['poptext'] = 'Block summary';
