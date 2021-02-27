@@ -34,6 +34,7 @@ $string['pluginname'] = 'Super frame';
 $string['welcomeuser'] = 'Welcome {$a->firstname} {$a->lastname}';
 $string['message'] = 'I am a modest fellow';
 $string['viewlink'] = 'View page';
+$string['returncourse'] = 'Return to your course';
 
 // Admin settings file.
 $string['headerconfig'] = 'Super frame settings';
@@ -59,3 +60,10 @@ $string['custom'] = 'Custom';
 $string['small'] = 'Small';
 $string['medium'] = 'Medium';
 $string['large'] = 'Large';
+
+// Block data table
+$string['blockid'] = 'Block id';
+$string['blockname'] = 'Block name';
+$string['course'] = 'Block course';
+$string['catname'] = 'Course category';
+$string['tablecaption'] = 'Block data';

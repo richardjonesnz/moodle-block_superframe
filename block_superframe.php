@@ -81,20 +81,17 @@ class block_superframe extends block_base {
         $blockid = $this->instance->id;
         $context = context_block::instance($blockid);
 
+        // Add the courseid to pass to view page for return link.
+        $courseid = $this->page->course->id;
+
+        // List of course students.
+        $users = self::get_course_users($courseid);
+
         // Check the capability.
         if (has_capability('block/superframe:seeviewpagelink', $context)) {
             $renderer = $this->page->get_renderer('block_superframe');
-            $this->content->text = $renderer->fetch_block_content($blockid);
+            $this->content->text = $renderer->fetch_block_content($blockid, $courseid, $users);
         }
-
-        // List of course students.
-        /* Ignore this optional task for now - add to renderer function if you like.
-        $courseid = $this->page->course->id;
-        $users = self::get_course_users($courseid);
-        foreach ($users as $user) {
-            $this->content->text .='<li>' . $user->lastname . ', ' . $user->firstname . '</li>';
-        }
-        */
 
         return $this->content;
     }

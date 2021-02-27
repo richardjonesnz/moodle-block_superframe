@@ -31,4 +31,10 @@
 <div>
     <h3>{{welcome}}</h3>
     <a href="{{{url}}}">{{text}}</a>
+    <br><br>
+    {{#students}}
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-warning">{{.}}</li>
+      </ul>
+    {{/students}}
 </div>

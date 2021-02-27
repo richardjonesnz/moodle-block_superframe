@@ -18,23 +18,33 @@
 {{!
     @template block_superframe/frame
 
-    This template renders a url in an iframe of given size.
-
-
+    This template renders a table of data.
 
     Example context (json):
     {
-        "heading": "My superframe",
-        "url": "http://www.moodlebites.com",
-        "height": "400",
-        "width": "600"
+        tableheaders: [heading 1, heading 2]
+        tabledata: [ [item1 row 1, item2 row 1], [item1 row2, item2 row2], [...] ]
     }
 }}
-
-<div  class="container">
-        <p>{{fullname}}</p>
-    <h5>{{heading}}</h5>
-    <iframe src="{{url}}" height="{{height}}" width="{{width}}">
-    </iframe>
-    <p><a href="{{returnlink}}">{{returntext}}</a></p>
+<div class = "table-responsive">
+    <table class = "table table-striped">
+        {{! Using a get_string helper }}
+        <caption>
+            {{# str }} tablecaption, block_superframe {{/ str }}
+        </caption>
+        <thead>
+            {{#tableheaders}}
+                <th>{{.}}</th>
+            {{/tableheaders}}
+        </thead>
+        <tbody>
+            {{#tabledata}}
+                <tr>
+                    {{#.}}
+                        <td>{{.}}</td>
+                    {{/.}}
+                </tr>
+            {{/tabledata}}
+        </tbody>
+    </table>
 </div>
