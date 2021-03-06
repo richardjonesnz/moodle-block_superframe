@@ -20,11 +20,33 @@
 
     This template renders the content for the block.
 
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * welcome a welcome message - string
+    * url the link to the block's main content page (view page)
+    * text the view page link text
+    * students - an array of student names
+    * popurl the link to the block data page (block_data page)
+    * poptext the block data page link text
+    * tableurl the link to the table manager page (tablemanager page)
+    * tabletext the table manager page link text
+
+
     Example context (json):
     {
         "welcome": "Welcome user",
         "url": "http://www.moodlebites.com",
         "text": "view page link"
+        'students": "[name1, name2, ...]"
+        "popurl": "#",
+        "poptext": "block data"
+        "tableurl": "#",
+        "tabletext": "table manager"
     }
 }}
 

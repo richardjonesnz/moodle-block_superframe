@@ -41,6 +41,25 @@ class block_superframe_renderer extends plugin_renderer_base {
         $data->returnlink = new moodle_url('/course/view.php', ['id' => $courseid]);
         $data->returntext = get_string('returncourse', 'block_superframe');
 
+        // Text for the links and the size parameter.
+        $strings = array();
+        $strings[] = get_string('custom', 'block_superframe');
+        $strings[] = get_string('small', 'block_superframe');
+        $strings[] = get_string('medium', 'block_superframe');
+        $strings[] = get_string('large', 'block_superframe');
+
+        // Create the data structure for the links.
+        $links = array();
+        $link = new moodle_url('/blocks/superframe/view.php', ['courseid' => $courseid,
+                'blockid' => $blockid]);
+
+        foreach ($strings as $string) {
+            $links[] = ['link' => $link->out(false, ['size' => $string]),
+                    'text' => $string];
+        }
+
+        $data->linkdata = $links;
+
         // Start output to browser.
         echo $this->output->header();
 
