@@ -15,21 +15,18 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details
+ * Callback functions for block_superframe.
  *
- * @package   block_superframe
- * @copyright  Daniel Neis <danielneis@gmail.com>
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
-/**
- * Modified for use in MoodleBites for Developers Level 1
- * by Richard Jones & Justin Hunt.
- *
- * See: https://www.moodlebites.com/mod/page/view.php?id=24546
+ * @package block_superframe
+ * @copyright 2018 Richard Jones
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2021030701; // Minimal block.
-$plugin->requires  = 2018120300; // Minimum Moodle 3.6.
-$plugin->component = 'block_superframe';
+function block_superframe_extend_navigation_course($navigation, $course, $context) {
+
+    $url = new moodle_url('/blocks/superframe/block_data.php');
+    $navigation->add(get_string('userlink', 'block_superframe'), $url, navigation_node::TYPE_SETTING,
+                get_string('userlink', 'block_superframe'), 'superframe',
+                new pix_icon('icon', '', 'block_superframe'));
+}
