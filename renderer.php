@@ -23,10 +23,13 @@
  */
 class block_superframe_renderer extends plugin_renderer_base {
 
- function display_view_page($url, $width, $height, $courseid) {
+ function display_view_page($url, $width, $height, $courseid, $blockid) {
     global $USER;
 
         $data = new stdClass();
+
+        // User name (from an earlier optional exercise)
+        $data->name = fullname($USER);
 
         // Page heading and iframe data.
         $data->heading = get_string('pluginname', 'block_superframe');
@@ -43,6 +46,7 @@ class block_superframe_renderer extends plugin_renderer_base {
 
         // Text for the links and the size parameter.
         $strings = array();
+
         $strings[] = get_string('custom', 'block_superframe');
         $strings[] = get_string('small', 'block_superframe');
         $strings[] = get_string('medium', 'block_superframe');
