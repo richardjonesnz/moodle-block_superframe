@@ -1,0 +1,10 @@
+config: stdClass Object
+(
+    [height] => 600
+    [pagelayout] => course
+    [url] => https://quizlet.com/132695231/scatter/embed
+    [version] => 2021030701
+    [width] => 800
+    [size] => custom
+)
+

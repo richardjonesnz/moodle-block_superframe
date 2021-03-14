@@ -31,7 +31,7 @@
 
 // General strings.
 $string['pluginname'] = 'Super frame';
-$string['welcomeuser'] = 'Welcome {$a->firstname} {$a->lastname}';
+$string['welcomeuser'] = 'Welcome {$a}';
 $string['message'] = 'I am a modest fellow';
 $string['viewlink'] = 'View page';
 $string['returncourse'] = 'Return to your course';
@@ -72,3 +72,6 @@ $string['tabletext'] = 'Table manager';
 
 // Navigation API.
 $string['userlink'] = 'Installed blocks';
+
+// AMD modal message.
+$string['about'] = 'About superframe';
