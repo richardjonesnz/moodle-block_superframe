@@ -35,6 +35,7 @@
     * poptext the block data page link text
     * tableurl the link to the table manager page (tablemanager page)
     * tabletext the table manager page link text
+    * access the last time the course this block is in was accessed unix time string
 
 
     Example context (json):
@@ -47,11 +48,15 @@
         "poptext": "block data"
         "tableurl": "#",
         "tabletext": "table manager"
+        "last acesss": "1293876000"
     }
 }}
 
 <div>
     <h3 class="{{headingclass}}">{{welcome}}</h3>
+    {{# str }} lastaccess, block_superframe {{/ str }}
+            {{#userdate}} {{access}}, {{#str}} strftimedate {{/str}} {{/userdate}}
+    <br>
     <a href="{{{url}}}">{{text}}</a>
     <br><br>
     {{#students}}
@@ -61,4 +66,5 @@
     {{/students}}
     <br><a href={{{popurl}}} target="_blank"> {{poptext}}</a>
     <br><a href={{{tableurl}}}> {{tabletext}}</a>
+
 </div>

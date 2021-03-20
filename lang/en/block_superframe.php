@@ -78,3 +78,6 @@ $string['about'] = 'About superframe';
 
 // Page viewed event string.
 $string['pageviewed'] = 'Block page viewed';
+
+// Last access.
+$string['lastaccess'] = 'Last access: ';

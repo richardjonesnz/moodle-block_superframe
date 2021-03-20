@@ -81,7 +81,7 @@ class block_superframe_renderer extends plugin_renderer_base {
     }
 
     function fetch_block_content($blockid, $courseid, $students) {
-        global $USER;
+        global $USER, $DB;
 
         $data = new stdClass();
 
@@ -109,6 +109,9 @@ class block_superframe_renderer extends plugin_renderer_base {
         $data->tableurl = new moodle_url('/blocks/superframe/tablemanager.php');
         $data->tabletext = get_string('tabletext', 'block_superframe');
 
+        // The users last access time to the course containing the block.
+        $data->access = $DB->get_field('user_lastaccess', 'timeaccess', ['courseid' => $courseid,
+                'userid' => $USER->id], MUST_EXIST);
 
         // Render the data in a Mustache template.
         return $this->render_from_template('block_superframe/block_content', $data);
