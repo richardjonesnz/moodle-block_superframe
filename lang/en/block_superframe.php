@@ -75,3 +75,6 @@ $string['userlink'] = 'Installed blocks';
 
 // AMD modal message.
 $string['about'] = 'About superframe';
+
+// Page viewed event string.
+$string['pageviewed'] = 'Block page viewed';

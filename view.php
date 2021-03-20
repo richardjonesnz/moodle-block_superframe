@@ -22,6 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 use \block_superframe\local\debugging;
+use \block_superframe\event\block_page_viewed;
 require('../../config.php');
 $blockid = required_param('blockid', PARAM_INT);
 $courseid = required_param('courseid', PARAM_INT);
@@ -35,6 +36,11 @@ $PAGE->set_pagelayout($def_config->pagelayout);
 $PAGE->set_title(get_string('pluginname', 'block_superframe'));
 $PAGE->navbar->add(get_string('pluginname', 'block_superframe'));
 require_login();
+
+// If we get here they have viewed the page.
+// Log the page viewed event.
+$event = \block_superframe\event\block_page_viewed::create(['context' => $PAGE->context]);
+$event->trigger();
 
 // Check the users permissions to see the view page.
 $context = context_course::instance($COURSE->id);
