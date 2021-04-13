@@ -87,7 +87,7 @@ class block_superframe_renderer extends plugin_renderer_base {
 
         $name = $USER->firstname . ' ' . $USER->lastname;
 
-        $this->page->requires->js_call_amd('block_superframe/test_amd', 'init', ['name' => $name]);
+        $this->page->requires->js_call_amd('block_superframe/test_es6', 'init', ['name' => $name]);
         $data->headingclass = 'block_superframe_heading';
 
         $data->studentlist = array();
@@ -97,13 +97,19 @@ class block_superframe_renderer extends plugin_renderer_base {
         }
 
         $data->welcome = get_string('welcomeuser', 'block_superframe', $name);
-        $data->url = new moodle_url('/blocks/superframe/view.php', ['blockid' => $blockid, 'courseid' => $courseid]);
+        $data->url = new moodle_url('/blocks/superframe/view.php', ['blockid' => $blockid,
+                'courseid' => $courseid]);
         $data->text = get_string('viewlink', 'block_superframe');
         $data->students = $studentlist;
 
         // Add a link to the popup page:
         $data->popurl = new moodle_url('/blocks/superframe/block_data.php');
         $data->poptext = get_string('poptext', 'block_superframe');
+
+        // Add a link to the history page:
+        $data->historyurl = new moodle_url('/blocks/superframe/history.php', ['blockid' => $blockid,
+                'courseid' => $courseid]);
+        $data->historytext = get_string('historytext', 'block_superframe');
 
         // Add a link to the table manager page:
         $data->tableurl = new moodle_url('/blocks/superframe/tablemanager.php');
@@ -146,6 +152,43 @@ class block_superframe_renderer extends plugin_renderer_base {
         // Call our template to render the data.
         echo $this->render_from_template(
                 'block_superframe/block_data', $table);
+        // Finish the page.
+        echo $this->output->footer();
+    }
+
+    /**
+     * Function to display a table of records
+     * @param array the records to display.
+     * @return none.
+     */
+    public function display_history($records) {
+
+        // Prepare the data for the template.
+        $table = new stdClass();
+
+        // Table headers.
+        $table->tableheaders = [
+                get_string('id', 'block_superframe'),
+                get_string('firstname', 'block_superframe'),
+                get_string('lastname', 'block_superframe'),
+                get_string('course', 'block_superframe'),
+                get_string('time', 'block_superframe'),
+        ];
+        // Build the data rows.
+        foreach ($records as $record) {
+            $data = array();
+            $data['id'] = $record->id;
+            $data['firstname'] = $record->firstname;
+            $data['lastname'] = $record->lastname;
+            $data['shortname'] = $record->shortname;
+            $data['lastaccess'] = $record->lastaccess;
+            $table->tabledata[] = $data;
+        }
+        // Start output to browser.
+        echo $this->output->header();
+        // Call our template to render the data.
+        echo $this->render_from_template(
+                'block_superframe/history', $table);
         // Finish the page.
         echo $this->output->footer();
     }

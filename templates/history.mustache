@@ -1,0 +1,62 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see http://www.gnu.org/licenses/.
+}}
+
+{{!
+    @template block_superframe/frame
+
+    This template renders a table of data.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * tableheaders an array of column headings for the table
+    * tabledata an array of arrays of row data for the table vody
+
+    Example context (json):
+    {
+        tableheaders: [heading 1, heading 2]
+        tabledata: [ [item1 row 1, item2 row 1], [item1 row2, item2 row2], [...] ]
+    }
+}}
+<div class = "table-responsive">
+    <table class = "table table-striped">
+        {{! Using a get_string helper }}
+        <caption>
+            {{# str }} historycaption, block_superframe {{/ str }}
+        </caption>
+        <thead>
+            {{#tableheaders}}
+                <th>{{.}}</th>
+            {{/tableheaders}}
+        </thead>
+        <tbody>
+            {{#tabledata}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{firstname}}</td>
+                    <td>{{lastname}}</td>
+                    <td>{{shortname}}</td>
+                    <td>{{#userdate}} {{lastaccess}}, %A, %d %B %Y, %I:%M %p {{/userdate}}</td>
+                </tr>
+            {{/tabledata}}
+        </tbody>
+    </table>
+</div>

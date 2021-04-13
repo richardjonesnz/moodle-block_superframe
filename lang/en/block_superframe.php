@@ -69,6 +69,14 @@ $string['catname'] = 'Course category';
 $string['tablecaption'] = 'Block data';
 $string['poptext'] = 'Block summary';
 $string['tabletext'] = 'Table manager';
+$string['historytext'] = 'Visit history';
+$string['historycaption'] = 'History';
+$string['firstname'] = 'First name';
+$string['lastname'] = 'Last name';
+$string['shortname'] = 'Course name';
+$string['time'] = 'Visited time';
+$string['id'] = 'id';
+
 
 // Navigation API.
 $string['userlink'] = 'Installed blocks';

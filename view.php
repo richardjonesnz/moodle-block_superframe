@@ -34,16 +34,25 @@ $PAGE->set_heading($SITE->fullname);
 $PAGE->set_pagelayout($def_config->pagelayout);
 $PAGE->set_title(get_string('pluginname', 'block_superframe'));
 $PAGE->navbar->add(get_string('pluginname', 'block_superframe'));
+
 require_login();
+
+// Check the users permissions to see the view page.
+$context = context_course::instance($COURSE->id);
+require_capability('block/superframe:seeviewpage', $context);
 
 // If we get here they have viewed the page.
 // Log the page viewed event.
 $event = \block_superframe\event\block_page_viewed::create(['context' => $PAGE->context]);
 $event->trigger();
 
-// Check the users permissions to see the view page.
-$context = context_course::instance($COURSE->id);
-require_capability('block/superframe:seeviewpage', $context);
+// Add a history record to our block's visits table.
+// NOTE: We couldn't use history as the max table length is 26 characters.
+$data = new stdClass();
+$data->userid = $USER->id;
+$data->courseid = $courseid;
+$data->lastaccess = time();
+$DB->insert_record('block_superframe_visits', $data);
 
 // Get the instance configuration data from the database.
 // It's stored as a base 64 encoded serialized string.

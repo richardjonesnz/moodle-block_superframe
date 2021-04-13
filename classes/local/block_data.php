@@ -46,4 +46,14 @@ class block_data {
                 ORDER BY b.blockname DESC";
         return $DB->get_records_sql($sql, ['clevel' => 80]);
     }
+
+    public static function fetch_history() {
+        global $DB;
+        $sql = "SELECT v.id, v.lastaccess, u.firstname, u.lastname, c.shortname
+                FROM {block_superframe_visits} v
+                JOIN {user} u ON v.userid = u.id
+                JOIN {course} c ON courseid = c.id";
+
+        return $DB->get_records_sql($sql);
+    }
 }
